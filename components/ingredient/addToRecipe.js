@@ -13,7 +13,7 @@ const initialState = {
 };
 
 // React functional component
-export default function AddToRecipe({ id, obj }) {
+export default function AddToRecipe({ id }) {
   // State variables
   const [recipes, setRecipes] = useState([]); // State for storing customer data
   const [currentRecipe, setCurrentRecipe] = useState(initialState); // State for the current customer
