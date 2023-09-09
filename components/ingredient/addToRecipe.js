@@ -13,20 +13,27 @@ const initialState = {
 };
 
 // React functional component
-export default function AddToRecipe({ id }) {
+export default function AddToRecipe({ id, obj }) {
   // State variables
   const [recipes, setRecipes] = useState([]); // State for storing customer data
   const [currentRecipe, setCurrentRecipe] = useState(initialState); // State for the current customer
   const router = useRouter(); // Router instance from Next.js
   // const { user } = useAuth(); // Using the user object from the authentication context
 
-  const showRecipes = () => {
-    getRecipe().then((data) => setRecipes(data));
-  };
+  // Effect that runs when the component mounts or when 'obj', 'customers', or 'user.id' changes
   useEffect(() => {
-    showRecipes();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // Fetch customers by the user's store ID and update 'customers' state
+    getRecipe().then(setRecipes);
+
+    // If 'obj' has data, update the 'currentCustomer' state with the provided information
+    if (obj.id) {
+      setCurrentRecipe({
+        id: obj.id,
+        recipeId: obj.recipe_id,
+        ingredientId: obj.ingredient_id,
+      });
+    }
+  }, [obj, recipes]);
 
   // Event handler for input changes
   const handleChange = (e) => {
@@ -56,7 +63,7 @@ export default function AddToRecipe({ id }) {
       <FloatingLabel controlId="floatingSelect" label="Customer">
         <Form.Select
           aria-label="Customer"
-          name="customerId"
+          name="recipeId"
           className="mb-3"
           onChange={handleChange}
           value={currentRecipe.recipeId}
@@ -75,7 +82,7 @@ export default function AddToRecipe({ id }) {
         </Form.Select>
       </FloatingLabel>
       <div>
-        <Button type="submit">Add To Customer</Button>
+        <Button type="submit">Add To Recipe</Button>
       </div>
     </Form>
   );

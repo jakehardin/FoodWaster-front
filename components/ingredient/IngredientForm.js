@@ -55,6 +55,7 @@ const IngredientForm = ({ obj }) => {
         id: obj.id,
         name: currentIngredient.name,
         uid: user.uid,
+        food_type: currentIngredient.food_type,
       };
 
       updateIngredient(ingredientUpdate)

@@ -131,6 +131,22 @@ const addIngredientToRecipe = (ingredientId, payload) => new Promise((resolve, r
     .catch(reject); // If an error occurs during the fetch or parsing, rejecting the promise with the error
 });
 
+const removeIngredientFromRecipe = (ingredientId, recipeId) => new Promise((resolve, reject) => {
+  // Creating a request body in JSON format containing the 'customerId'
+  const requestBody = JSON.stringify({ recipeId });
+
+  // Initiating an HTTP DELETE request to the specified endpoint
+  fetch(`${clientCredentials.databaseURL}/ingredients/${ingredientId}/removefromrecipe`, {
+    method: 'DELETE', // Using the DELETE HTTP method
+    body: requestBody, // Including the request body with customer ID
+    headers: {
+      'Content-Type': 'application/json', // Specifying content type as JSON
+    },
+  })
+    .then(resolve) // Resolving the promise if the request is successful
+    .catch(reject); // Rejecting the promise if there's an error
+});
+
 export {
   getIngredient,
   getSingleIngredient,
@@ -141,4 +157,5 @@ export {
   // getTherapistsByCategory,
   // getTherapistReviews,
   addIngredientToRecipe,
+  removeIngredientFromRecipe,
 };

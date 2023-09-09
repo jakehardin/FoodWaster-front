@@ -116,6 +116,14 @@ const deleteRecipe = (id) => new Promise((resolve, reject) => {
 //     .catch(reject);
 // });
 
+const getRecipeIngredients = (id) => new Promise((resolve, reject) => {
+  // Make a GET request to the customer's endpoint to retrieve their associated books
+  fetch(`${clientCredentials.databaseURL}/recipes/${id}/get_ingredients`)
+    .then((response) => response.json()) // Parse the response as JSON
+    .then(resolve) // Resolve the promise with the parsed JSON data
+    .catch(reject); // Reject the promise if an error occurs
+});
+
 export {
   getRecipe,
   getSingleRecipe,
@@ -125,4 +133,5 @@ export {
   // favoriteTherapists,
   // getTherapistsByCategory,
   // getTherapistReviews,
+  getRecipeIngredients,
 };
