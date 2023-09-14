@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { createRecipe, updateRecipe } from '../../utils/data/recipeData';
+import { useAuth } from '../../utils/context/authContext';
 
 const initialState = {
   name: '',
   description: '',
+  completed: false,
 };
 
 const RecipeForm = ({ obj }) => {
   const [currentRecipe, setCurrentRecipe] = useState(initialState);
   const router = useRouter();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (obj.id) {
@@ -19,9 +22,10 @@ const RecipeForm = ({ obj }) => {
         id: obj.id,
         name: obj.name,
         description: obj.description,
+        uid: user.uid,
       });
     }
-  }, [obj]);
+  }, [obj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +45,7 @@ const RecipeForm = ({ obj }) => {
         id: obj.id,
         description: currentRecipe.description,
         name: currentRecipe.name,
+        uid: user.uid,
         completed: Boolean(currentRecipe.completed),
       };
 
@@ -50,6 +55,7 @@ const RecipeForm = ({ obj }) => {
       const recipes = {
         name: currentRecipe.name,
         description: currentRecipe.description,
+        uid: user.uid,
         completed: Boolean(currentRecipe.completed),
       };
 
@@ -60,7 +66,7 @@ const RecipeForm = ({ obj }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Ingredient</h2>
+        <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Recipe</h2>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control name="name" required value={currentRecipe.name} onChange={handleChange} type="string" />
@@ -80,8 +86,8 @@ const RecipeForm = ({ obj }) => {
         <Form.Check
           className="mb-3"
           type="switch"
-          id="favorite"
-          name="favorite"
+          id="complete"
+          name="complete"
           label="Complete?"
           checked={currentRecipe.completed}
           onChange={(e) => {

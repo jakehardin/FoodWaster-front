@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { clientCredentials } from '../client';
 
-// Get therapists
+// Get ingredients
 const getIngredient = () => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/ingredients`, {
     method: 'GET',
@@ -20,7 +20,7 @@ const getIngredient = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Get a single therapist
+// Get a single ingredient
 const getSingleIngredient = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/ingredients/${id}`, {
     method: 'GET',
@@ -33,7 +33,7 @@ const getSingleIngredient = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Create therapist
+// Create ingredient
 const createIngredient = (payload) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/ingredients`, {
     method: 'POST',
@@ -47,7 +47,7 @@ const createIngredient = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Update therapist
+// Update ingredient
 const updateIngredient = (payload) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/ingredients/${payload.id}`, {
     method: 'PUT',
@@ -60,7 +60,7 @@ const updateIngredient = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Delete therapist
+// Delete ingredient
 const deleteIngredient = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/ingredients/${id}`, {
     method: 'DELETE',
@@ -72,79 +72,49 @@ const deleteIngredient = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// // Get therapist by favorite
-// const favoriteIngredients = (id) => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/ingredients/${id}`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const favorites = Object.values(data).filter((item) => item.favorite);
-//       resolve(favorites);
-//     })
-//     .catch(reject);
-// });
-
-// // FIXME: Get therapist by category
-// const getTherapistsByCategory = (id) => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/therapists`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const usersTherapists = Object.values(data).filter((item) => item.category_id.id === id);
-//       resolve(usersTherapists);
-//     })
-//     .catch(reject);
-// });
-
-// const getTherapistReviews = (therapistId) => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/reviews?therapist_id=${therapistId}`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'applications.json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(Object.values(data)))
-//     .catch(reject);
-// });
-
-// Function to add a book to a customer's collection
 const addIngredientToRecipe = (ingredientId, payload) => new Promise((resolve, reject) => {
-  // Sending a POST request to the endpoint with the bookId and payload
   fetch(`${clientCredentials.databaseURL}/ingredients/${ingredientId}/addtorecipe`, {
     method: 'POST',
-    body: JSON.stringify(payload), // Converting payload to JSON string and sending in the request body
+    body: JSON.stringify(payload),
     headers: {
-      'Content-Type': 'application/json', // Specifying the content type as JSON
+      'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json()) // Parsing the response data as JSON
-    .then((data) => resolve(data)) // Resolving the promise with the response data
-    .catch(reject); // If an error occurs during the fetch or parsing, rejecting the promise with the error
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
 });
 
 const removeIngredientFromRecipe = (ingredientId, recipeId) => new Promise((resolve, reject) => {
-  // Creating a request body in JSON format containing the 'customerId'
   const requestBody = JSON.stringify({ recipeId });
 
-  // Initiating an HTTP DELETE request to the specified endpoint
   fetch(`${clientCredentials.databaseURL}/ingredients/${ingredientId}/removefromrecipe`, {
-    method: 'DELETE', // Using the DELETE HTTP method
-    body: requestBody, // Including the request body with customer ID
+    method: 'DELETE',
+    body: requestBody,
     headers: {
-      'Content-Type': 'application/json', // Specifying content type as JSON
+      'Content-Type': 'application/json',
     },
   })
-    .then(resolve) // Resolving the promise if the request is successful
-    .catch(reject); // Rejecting the promise if there's an error
+    .then(resolve)
+    .catch(reject);
+});
+
+const getMyIngredients = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/ingredients?uid=${uid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
 });
 
 export {
@@ -153,9 +123,7 @@ export {
   createIngredient,
   updateIngredient,
   deleteIngredient,
-  // favoriteTherapists,
-  // getTherapistsByCategory,
-  // getTherapistReviews,
   addIngredientToRecipe,
   removeIngredientFromRecipe,
+  getMyIngredients,
 };

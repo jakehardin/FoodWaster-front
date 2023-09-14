@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import IngredientCard from '../components/ingredient/IngredientCard';
-import { getIngredient } from '../utils/data/ingredientData';
+import { getMyIngredients } from '../utils/data/ingredientData';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
@@ -11,7 +11,7 @@ function Home() {
   const { user } = useAuth();
 
   const showIngredients = () => {
-    getIngredient().then((data) => setIngredients(data));
+    getMyIngredients(user.uid).then((data) => setIngredients(data));
   };
   useEffect(() => {
     showIngredients();
@@ -32,7 +32,7 @@ function Home() {
         </Button>
         {ingredients.map((ingredient) => (
           <section key={`ingredient--${ingredient.id}`} className="post">
-            <IngredientCard key={ingredient.id} ingredientObj={ingredient} onUpdate={getIngredient} isMine={ingredient.uid === user.uid} />
+            <IngredientCard key={ingredient.uid} ingredientObj={ingredient} onUpdate={getMyIngredients} isMine={ingredient.uid === user.uid} />
           </section>
         ))}
       </article>

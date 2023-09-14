@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { clientCredentials } from '../client';
 
-// Get therapists
+// Get FoodTypes
 const getFoodTypes = () => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/food_types`, {
     method: 'GET',
@@ -20,7 +20,7 @@ const getFoodTypes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Get a single therapist
+// Get a single food_type
 const getSingleRecipe = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes/${id}`, {
     method: 'GET',
@@ -33,7 +33,7 @@ const getSingleRecipe = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Create therapist
+// Create foodType
 const createRecipe = (payload) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes`, {
     method: 'POST',
@@ -47,7 +47,7 @@ const createRecipe = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Update therapist
+// Update foodType
 const updateRecipe = (payload) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes/${payload.id}`, {
     method: 'PUT',
@@ -60,7 +60,7 @@ const updateRecipe = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// Delete therapist
+// Delete food_type
 const deleteRecipe = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes/${id}`, {
     method: 'DELETE',
@@ -72,57 +72,10 @@ const deleteRecipe = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// // Get therapist by favorite
-// const favoriteIngredients = (id) => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/ingredients/${id}`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const favorites = Object.values(data).filter((item) => item.favorite);
-//       resolve(favorites);
-//     })
-//     .catch(reject);
-// });
-
-// // FIXME: Get therapist by category
-// const getTherapistsByCategory = (id) => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/therapists`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const usersTherapists = Object.values(data).filter((item) => item.category_id.id === id);
-//       resolve(usersTherapists);
-//     })
-//     .catch(reject);
-// });
-
-// const getTherapistReviews = (therapistId) => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/reviews?therapist_id=${therapistId}`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'applications.json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(Object.values(data)))
-//     .catch(reject);
-// });
-
 export {
   getFoodTypes,
   getSingleRecipe,
   createRecipe,
   updateRecipe,
   deleteRecipe,
-  // favoriteTherapists,
-  // getTherapistsByCategory,
-  // getTherapistReviews,
 };
