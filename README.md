@@ -1,44 +1,47 @@
-# React/Next.js Django Auth Template
+# FoodSaver [![Netlify Status](https://api.netlify.com/api/v1/badges/9e98dcd5-de31-4bd3-bcf5-4e794ff0ed97/deploy-status)](https://app.netlify.com/sites/the-town-square/deploys)
+<!-- update the netlify badge above with your own badge that you can find at netlify under settings/general#status-badges -->
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+This is an application I made for NSS.
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+[View App](https://the-town-square.netlify.app)
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+## Code Snippet <!-- OPTIONAL, but doesn't hurt -->
+```
+          <h5>
+            {topic.topicObject?.topic_name}
+          </h5>
+```
+## About the User <!-- This is a scaled down user persona -->
+- User often forgets what ingredients and leftover food they have in the fridge.
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+- User wants to get better at planning meals.
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://user-images.githubusercontent.com/29741570/177615077-9b6a75bc-0260-4d29-bb88-bd95a3140687.png">
+- User knows good cooks can incorporate leftover items into fantastic dishes.
 
+- User wants to get better at repurposing food in general.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Features <!-- List your app features using bullets! Do NOT use a paragraph. No one will read that! -->
+- Ingredient Submission
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+- Creating Recipes
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+- Adding leftover ingredients to a recipe
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Search Ingredients and Recipes
+
+- Assign a Food Type to leftover ingredients.
+
+## Video Walkthrough of APP NAME <!-- A loom link is sufficient -->
+https://www.loom.com/share/829b90d831ea441ba2db6bea724af210
+
+## Relevant Links <!-- Link to all the things that are required outside of the ones that have their own section -->
+- [Check out the deployed site](https://the-town-square.netlify.app)
+- [ERD](https://dbdiagram.io/d/63ead4f9296d97641d80a82c)
+- [Project Board](https://github.com/users/jakehardin/projects/4)
+
+## Project Screenshots <!-- These can be inside of your project. Look at the repos from class and see how the images are included in the readme -->
+<img width="1148" alt="Welcome to the Town Square." src="https://www.united-against-waste.ch/wp-content/uploads/2020/02/Food-Save-App-1024x677.png">
+
+## Contributors
+- [Jacob Hardin](https://github.com/jakehardin)
+- [E21](https://github.com/nss-evening-cohort-21)
