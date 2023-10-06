@@ -1,31 +1,22 @@
-// Import necessary dependencies and modules
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FloatingLabel } from 'react-bootstrap'; // Importing UI components from react-bootstrap
-import { useRouter } from 'next/router'; // Importing the router from Next.js
-import { addIngredientToRecipe } from '../../utils/data/ingredientData'; // Importing a function to add a book to a customer
-import { getRecipe } from '../../utils/data/recipeData'; // Importing a function to get customers by store ID
-// import { useAuth } from '../../utils/context/authContext'; // Importing authentication context
+import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import { addIngredientToRecipe } from '../../utils/data/ingredientData';
+import { getRecipe } from '../../utils/data/recipeData';
 
-// Initial state for the current customer
 const initialState = {
   recipe_id: 0,
 };
 
-// React functional component
 export default function AddToRecipe({ id, obj }) {
-  // State variables
-  const [recipes, setRecipes] = useState([]); // State for storing customer data
-  const [currentRecipe, setCurrentRecipe] = useState(initialState); // State for the current customer
-  const router = useRouter(); // Router instance from Next.js
-  // const { user } = useAuth(); // Using the user object from the authentication context
+  const [recipes, setRecipes] = useState([]);
+  const [currentRecipe, setCurrentRecipe] = useState(initialState);
+  const router = useRouter();
 
-  // Effect that runs when the component mounts or when 'obj', 'customers', or 'user.id' changes
   useEffect(() => {
-    // Fetch customers by the user's store ID and update 'customers' state
     getRecipe().then(setRecipes);
 
-    // If 'obj' has data, update the 'currentCustomer' state with the provided information
     if (obj.id) {
       setCurrentRecipe({
         id: obj.id,
@@ -33,36 +24,30 @@ export default function AddToRecipe({ id, obj }) {
         ingredientId: obj.ingredient_id,
       });
     }
-  }, [obj, recipes]);
+  }, []);
 
-  // Event handler for input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Update 'currentCustomer' state by merging the new value for the changed input field
     setCurrentRecipe((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  // Event handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Prepare payload for adding book to customer
     const payload = {
       recipeId: Number(currentRecipe.recipeId),
       ingredientId: Number(id),
     };
-    // Call the 'addBookToCustomer' function and navigate to customer's page after completion
     addIngredientToRecipe(id, payload).then(() => router.push(`/recipes/${currentRecipe.recipeId}`));
   };
 
-  // JSX to render the component
   return (
     <Form onSubmit={handleSubmit}>
-      <FloatingLabel controlId="floatingSelect" label="Customer">
+      <FloatingLabel controlId="floatingSelect" label="Add to Recipe">
         <Form.Select
-          aria-label="Customer"
+          aria-label="Add to Recipe"
           name="recipeId"
           className="mb-3"
           onChange={handleChange}
@@ -70,7 +55,7 @@ export default function AddToRecipe({ id, obj }) {
           required
         >
           <option value="">Select a Recipe</option>
-          {/* Map over customers and create an option element for each */}
+          {/* Map over recipes */}
           {recipes.map((recipe) => (
             <option
               key={recipe.id}
@@ -82,15 +67,15 @@ export default function AddToRecipe({ id, obj }) {
         </Form.Select>
       </FloatingLabel>
       <div>
-        <Button type="submit">Add To Recipe</Button>
+        <Button className="white-button" type="submit">Add To Recipe</Button>
       </div>
     </Form>
   );
 }
 
-// PropTypes for the component's props
+// PropTypes
 AddToRecipe.propTypes = {
-  id: PropTypes.number.isRequired, // 'id' is a required number
+  id: PropTypes.number.isRequired,
   obj: PropTypes.shape({
     id: PropTypes.number,
     recipe_id: PropTypes.number,
@@ -98,9 +83,7 @@ AddToRecipe.propTypes = {
   }),
 };
 
-// Default props for the component
+// Default Props
 AddToRecipe.defaultProps = {
-  obj: initialState, // Default 'obj' is the initial state object
+  obj: initialState,
 };
-
-// Summary: this component creates a form that enables users to associate a book with a selected customer by choosing the customer from a dropdown list. The form submission triggers an action to add the book to the chosen customer, and the component provides a user interface for this process.

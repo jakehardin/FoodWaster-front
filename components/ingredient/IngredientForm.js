@@ -11,6 +11,7 @@ const initialState = {
   name: '',
   food_type: '',
   date: '',
+  image: '',
 };
 
 const IngredientForm = ({ obj }) => {
@@ -24,6 +25,7 @@ const IngredientForm = ({ obj }) => {
       setCurrentIngredient({
         id: obj.id,
         name: obj.name,
+        image: obj.image,
         food_type: obj.food_type,
         date: obj.date,
         uid: user.uid,
@@ -54,6 +56,7 @@ const IngredientForm = ({ obj }) => {
       const ingredientUpdate = {
         id: obj.id,
         name: currentIngredient.name,
+        image: currentIngredient.image,
         uid: user.uid,
         food_type: currentIngredient.food_type,
       };
@@ -65,6 +68,7 @@ const IngredientForm = ({ obj }) => {
       const ingredients = {
         name: currentIngredient.name,
         date: currentDate,
+        image: currentIngredient.image,
         food_type: currentIngredient.food_type,
         uid: user.uid,
       };
@@ -81,10 +85,10 @@ const IngredientForm = ({ obj }) => {
           <Form.Label>Name</Form.Label>
           <Form.Control name="name" required value={currentIngredient.name} onChange={handleChange} type="string" />
         </Form.Group>
-        {/* <Form.Group className="mb-3">
+        <Form.Group className="mb-3">
           <Form.Label>Image Url</Form.Label>
           <Form.Control name="image" required value={currentIngredient.image} onChange={handleChange} type="string" />
-        </Form.Group> */}
+        </Form.Group>
         {/* <Form.Group className="mb-3">
           <Form.Label>Price</Form.Label>
           <Form.Control name="price" required value={currentIngredient.price} onChange={handleChange} type="string" />
@@ -126,6 +130,7 @@ IngredientForm.propTypes = {
     name: PropTypes.string,
     date: PropTypes.string,
     food_type: PropTypes.number,
+    image: PropTypes.string,
   }),
 };
 

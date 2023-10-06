@@ -10,7 +10,7 @@ import { deleteIngredient } from '../../utils/data/ingredientData';
 export default function IngredientCard({ ingredientObj, onUpdate }) {
   // const [foodType, setFoodType] = useState({});
   const deleteThisIngredient = () => {
-    if (window.confirm(`Delete ${ingredientObj.name}}?`)) {
+    if (window.confirm(`Delete ${ingredientObj.name}?`)) {
       deleteIngredient(ingredientObj.id).then(() => onUpdate());
     }
   };
@@ -22,19 +22,19 @@ export default function IngredientCard({ ingredientObj, onUpdate }) {
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
-        {/* <img src={ingredientObj.profile_image_url} alt="user" width="100px" height="100px" /> */}
+        <img src={ingredientObj.image} alt="user" width="100px" height="100px" />
         <h2>
           {ingredientObj.name}
         </h2>
         {/* <h3>{foodType.name}</h3> */}
         <p>{ingredientObj.date}</p>
         <Link href={`/ingredients/${ingredientObj.id}`} passHref>
-          <Button variant="primary" className="m-2">Details</Button>
+          <Button variant="primary" className="white-button">Details</Button>
         </Link>
         <Link href={`/ingredients/edit/${ingredientObj.id}`} passHref>
-          <Button variant="info">Edit</Button>
+          <Button variant="info" className="white-button">Edit</Button>
         </Link>
-        <Button variant="danger" onClick={deleteThisIngredient} className="m-2">
+        <Button variant="danger" onClick={deleteThisIngredient} className="white-button">
           Delete
         </Button>
       </Card.Body>
@@ -46,6 +46,7 @@ IngredientCard.propTypes = {
   ingredientObj: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    image: PropTypes.string,
     date: PropTypes.string,
     // food_type: PropTypes.number,
   }).isRequired,
