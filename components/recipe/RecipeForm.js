@@ -9,6 +9,7 @@ const initialState = {
   name: '',
   description: '',
   completed: false,
+  image: '',
 };
 
 const RecipeForm = ({ obj }) => {
@@ -22,6 +23,8 @@ const RecipeForm = ({ obj }) => {
         id: obj.id,
         name: obj.name,
         description: obj.description,
+        image: obj.image,
+        completed: obj.completed,
         uid: user.uid,
       });
     }
@@ -45,6 +48,7 @@ const RecipeForm = ({ obj }) => {
         id: obj.id,
         description: currentRecipe.description,
         name: currentRecipe.name,
+        image: currentRecipe.image,
         uid: user.uid,
         completed: Boolean(currentRecipe.completed),
       };
@@ -55,6 +59,7 @@ const RecipeForm = ({ obj }) => {
       const recipes = {
         name: currentRecipe.name,
         description: currentRecipe.description,
+        image: currentRecipe.image,
         uid: user.uid,
         completed: Boolean(currentRecipe.completed),
       };
@@ -75,10 +80,10 @@ const RecipeForm = ({ obj }) => {
           <Form.Label>Description</Form.Label>
           <Form.Control name="description" required value={currentRecipe.description} onChange={handleChange} type="string" />
         </Form.Group>
-        {/* <Form.Group className="mb-3">
+        <Form.Group className="mb-3">
           <Form.Label>Image Url</Form.Label>
-          <Form.Control name="image" required value={currentIngredient.image} onChange={handleChange} type="string" />
-        </Form.Group> */}
+          <Form.Control name="image" required value={currentRecipe.image} onChange={handleChange} type="string" />
+        </Form.Group>
         {/* <Form.Group className="mb-3">
           <Form.Label>Price</Form.Label>
           <Form.Control name="price" required value={currentIngredient.price} onChange={handleChange} type="string" />
@@ -110,6 +115,7 @@ RecipeForm.propTypes = {
   obj: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    image: PropTypes.string,
     description: PropTypes.string,
     completed: PropTypes.bool,
   }),

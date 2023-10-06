@@ -20,3 +20,12 @@ a {
 body {
   background-color: #e7ebe8;
 }
+
+.white-button {
+  background-color: white;
+  color: black; /* You can adjust the text color as needed */
+  border: 1px solid #ccc; /* Add a border to make it more visually distinct */
+  padding: 10px 20px; /* Adjust padding to your preference */
+  font-size: 16px; /* Adjust font size as needed */
+  cursor: pointer; /* Add pointer cursor for better UX */
+}

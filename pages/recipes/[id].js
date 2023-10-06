@@ -39,9 +39,9 @@ const ViewRecipe = () => {
             {recipeDetails.name}
           </h3>
           <h5>{recipeDetails.description}</h5>
-          <h3>Ingredients:</h3>
+          <h3>Ingredients available:</h3>
           {recipeIngredients.map((recipeIngredient) => (
-            <section key={`recipeIngredient--${recipeIngredient.id}`} className="customerBooks">
+            <section key={`recipeIngredient--${recipeIngredient.id}`} className="white-button">
               <RecipeIngredientCard recipeIngredientObj={recipeIngredient} onUpdate={getIngredientsByRecipe} />
             </section>
           ))}

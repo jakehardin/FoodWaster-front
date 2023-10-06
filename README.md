@@ -7,9 +7,20 @@ This is an application I made for NSS.
 
 ## Code Snippet <!-- OPTIONAL, but doesn't hurt -->
 ```
-          <h5>
-            {topic.topicObject?.topic_name}
-          </h5>
+          @action(methods=['post'], detail=True)
+    def addtorecipe(self, request, pk):
+        """Add Book To Customer"""
+        
+        recipe = Recipe.objects.get(pk=request.data["recipeId"])
+        
+        ingredient = Ingredient.objects.get(pk=pk)
+            
+        
+        RecipeIngredient.objects.create(
+            recipe=recipe,
+            ingredient=ingredient
+        )
+        return Response({'message': 'Book added to Customer'}, status=status.HTTP_201_CREATED)
 ```
 ## About the User <!-- This is a scaled down user persona -->
 - User often forgets what ingredients and leftover food they have in the fridge.

@@ -24,6 +24,7 @@ function Home() {
         <h1>Recipes</h1>
 
         <Button
+          className="white-button"
           onClick={() => {
             router.push('/recipes/new');
           }}
@@ -32,7 +33,7 @@ function Home() {
         </Button>
         {recipes.map((recipe) => (
           <section key={`recipe--${recipe.id}`} className="post">
-            <RecipeCard key={recipe.uid} recipeObj={recipe} onUpdate={getMyRecipes} isMine={recipe.uid === user.uid} />
+            <RecipeCard key={recipe.uid} recipeObj={recipe} onUpdate={showRecipes} isMine={recipe.uid === user.uid} />
           </section>
         ))}
       </article>
