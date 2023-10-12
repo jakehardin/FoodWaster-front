@@ -9,7 +9,7 @@ const firebaseCredentials = {
 
 const clientCredentials = {
   ...firebaseCredentials,
-  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
 };
 
 if (!firebase.apps.length) {
